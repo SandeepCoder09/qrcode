@@ -4,16 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>09 QR Decoder</title>
-  <link rel="stylesheet" href="generator/style.css">
+
+  <!-- ✅ SEO -->
+  <meta name="description" content="09 QR Decoder – Decode QR codes instantly by uploading QR images.">
+  <meta name="keywords" content="QR Decoder, QR Code Reader, Decode QR">
+  <meta name="author" content="SandeepCoder09">
+
+  <!-- ✅ Open Graph -->
+  <meta property="og:title" content="09 QR Decoder">
+  <meta property="og:description" content="Decode QR codes online quickly and easily.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/favicon-192.png">
+
+  <!-- ✅ Theme Color -->
+  <meta name="theme-color" content="#00aaff">
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/favicon-192.png">
+
+  <!-- ❗ ORIGINAL CSS (UNCHANGED) -->
+  <link rel="stylesheet" href="../generator/style.css">
+
   <script src="https://unpkg.com/jsqr/dist/jsQR.js"></script>
 </head>
 
 <body>
 
-  <!-- Toggle Button -->
   <button id="themeToggle" class="toggle-btn">🌙</button>
 
-  <!-- Center Title -->
   <h1 class="main-title">09 QR Decoder</h1>
 
   <main class="card">
@@ -27,16 +47,21 @@
 
     <canvas id="decodeCanvas" style="display:none;"></canvas>
 
-<div class="decoded-box">
-    <label class="decoded-title">Decoded Result:</label>
-    <p id="decodedText">Upload a QR image…</p>
-</div>
+    <div class="decoded-box">
+      <label class="decoded-title">Decoded Result:</label>
+      <p id="decodedText">Upload a QR image…</p>
+    </div>
 
     <button id="copyBtn" class="btn-secondary">Copy Text</button>
 
-    <a href="generator/index.html" class="switch-page">← Back to Generator</a>
+    <a href="../generator/index.html" class="switch-page">
+      ← Back to Generator
+    </a>
+
   </main>
 
-<script src="generator/script.js"></script>
+  <!-- ❗ ORIGINAL JS (UNCHANGED) -->
+  <script src="../generator/script.js"></script>
+
 </body>
 </html>
