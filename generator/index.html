@@ -4,26 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>09 QR Generator</title>
-  <link rel="stylesheet" href="../generator/style.css">
+
+  <!-- ✅ SEO -->
+  <meta name="description" content="QR Generator – Create QR codes instantly with logo watermark and download support.">
+  <meta name="keywords" content="QR Generator, QR Code Generator, Create QR, Logo QR">
+  <meta name="author" content="SandeepCoder09">
+
+  <!-- ✅ Open Graph -->
+  <meta property="og:title" content="QR Generator">
+  <meta property="og:description" content="Generate QR codes instantly with logo watermark and download option.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/favicon-192.png">
+
+  <!-- ✅ Theme Color -->
+  <meta name="theme-color" content="#00aaff">
+
+  <!-- ✅ Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/favicon-192.png">
+
+  <!-- ❗ ORIGINAL CSS (UNCHANGED) -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- QR Lib -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 
 <body>
 
-  <!-- Theme Toggle (Top Right) -->
   <button id="themeToggle" class="toggle-btn">🌙</button>
 
-  <!-- Center Title -->
-  <h1 class="main-title">QR Generator</h1>
+  <h1 class="main-title">09 QR Generator</h1>
 
   <main class="card">
 
     <input type="text" id="qrText" placeholder="Enter text or URL">
 
-    <!-- <label class="file-label">
-      <span>Upload Your Brand Logo (Optional)</span>
+    <label class="file-label">
+      <span>Upload Logo (Optional)</span>
       <input type="file" id="logoInput" accept="image/*">
-    </label> -->
+    </label>
 
     <button id="generateBtn" class="btn">Generate QR</button>
 
@@ -34,8 +55,11 @@
     <a id="downloadBtn" download="qr.png" class="btn-secondary">Download QR</a>
 
     <a href="../decoder/index.html" class="switch-page">Go to Decoder →</a>
+
   </main>
 
-<script src="../generator/script.js"></script>
+  <!-- ❗ ORIGINAL JS (UNCHANGED) -->
+  <script src="script.js"></script>
+
 </body>
 </html>
