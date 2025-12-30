@@ -29,14 +29,19 @@ if (generateBtn && typeof QRCode !== "undefined") {
     const spinner = document.getElementById("loadingSpinner");
 
     if (!text) {
-      alert("Enter text or URL");
+      alert("Please enter a URL or text first!");
       return;
     }
 
     output.innerHTML = "";
     if (spinner) spinner.style.display = "block";
 
-    QRCode.toCanvas(text, { width: 300 }, (err, canvas) => {
+    // Set errorCorrectionLevel to 'H' (High) to allow for center obstruction
+    QRCode.toCanvas(text, { 
+      width: 600, // Higher resolution for better quality
+      margin: 2,
+      errorCorrectionLevel: 'H' 
+    }, (err, canvas) => {
       if (spinner) spinner.style.display = "none";
       if (err) {
         alert("QR generation failed");
@@ -44,29 +49,38 @@ if (generateBtn && typeof QRCode !== "undefined") {
       }
 
       const ctx = canvas.getContext("2d");
+      const size = canvas.width * 0.24; // Logo/Space size (24% of QR)
+      const x = (canvas.width - size) / 2;
+      const y = (canvas.height - size) / 2;
 
       const finish = () => {
         output.innerHTML = "";
         output.appendChild(canvas);
-        if (downloadBtn) downloadBtn.href = canvas.toDataURL("image/png");
+        if (downloadBtn) {
+            downloadBtn.style.display = "block";
+            downloadBtn.href = canvas.toDataURL("image/png");
+        }
       };
 
-      // Logo watermark
+      // 1. ALWAYS Draw the blank white center space
+      ctx.fillStyle = "#ffffff";
+      // Draw a smooth rounded rectangle for the center "pocket"
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(x - 5, y - 5, size + 10, size + 10, 15); // Slightly larger than logo for padding
+        ctx.fill();
+      } else {
+        ctx.fillRect(x - 5, y - 5, size + 10, size + 10);
+      }
+
+      // 2. Draw Logo if provided, otherwise just finish with the blank space
       if (logoFile) {
         const reader = new FileReader();
         const logo = new Image();
 
         reader.onload = () => {
           logo.onload = () => {
-            const size = canvas.width * 0.25;
-            const x = (canvas.width - size) / 2;
-            const y = (canvas.height - size) / 2;
-
-            ctx.fillStyle = "#fff";
-            ctx.beginPath();
-            ctx.roundRect(x, y, size, size, 12);
-            ctx.fill();
-
+            // Draw the actual logo inside the white space
             ctx.drawImage(logo, x, y, size, size);
             finish();
           };
@@ -95,7 +109,7 @@ if (qrImage && typeof jsQR !== "undefined") {
     const ctx = canvas?.getContext("2d");
 
     if (spinner) spinner.style.display = "block";
-    if (textEl) textEl.textContent = "Decoding…";
+    if (textEl) textEl.textContent = "Analyzing image...";
     if (copyBtn) copyBtn.style.display = "none";
 
     const reader = new FileReader();
@@ -118,12 +132,17 @@ if (qrImage && typeof jsQR !== "undefined") {
             copyBtn.style.display = "block";
             copyBtn.onclick = () => {
               navigator.clipboard.writeText(code.data);
-              copyBtn.textContent = "Copied!";
-              setTimeout(() => (copyBtn.textContent = "Copy Text"), 1500);
+              const originalText = copyBtn.textContent;
+              copyBtn.textContent = "✓ Copied!";
+              copyBtn.style.background = "#28a745";
+              setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.background = "";
+              }, 2000);
             };
           }
         } else {
-          textEl.textContent = "No QR code found";
+          textEl.textContent = "Could not find a valid QR code. Try a clearer image.";
         }
       };
       img.src = reader.result;
