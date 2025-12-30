@@ -1,12 +1,12 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "^/$",
-      "dest": "/generator/index.html"
+      "source": "/",
+      "destination": "/generator/index.html"
     },
     {
-      "src": "^/decoder/?$",
-      "dest": "/decoder/index.html"
+      "source": "/decoder",
+      "destination": "/decoder/index.html"
     }
   ]
 }
