@@ -1,6 +1,6 @@
 {
   "routes": [
-    { "src": "^/$", "dest": "/generator" },
+    { "src": "^/$", "dest": "/generator/index.html" },
     { "src": "^/decoder/?$", "dest": "/decoder" }
   ]
 }
