@@ -1,0 +1,179 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --blue: #00aaff;
+  --glass: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.15);
+  --text-light: #fff;
+  --text-dark: #111;
+  --dark-bg: #030711;
+  --light-bg: #e8f0ff;
+}
+
+/* Themes */
+[data-theme="dark"] {
+  --bg: var(--dark-bg);
+  --text: var(--text-light);
+}
+
+[data-theme="light"] {
+  --bg: var(--light-bg);
+  --text: var(--text-dark);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s ease;
+  text-align: center;
+}
+
+/* Toggle Button (Top Right) */
+.toggle-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  font-size: 18px;
+}
+
+/* Title */
+.main-title {
+  font-size: 26px;
+  margin-top: 70px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--blue);
+  text-shadow: 0 0 20px rgba(0,170,255,0.6);
+}
+
+/* Card */
+.card {
+  width: 90%;
+  max-width: 420px;
+  margin: 25px auto;
+  padding: 28px;
+  border-radius: 18px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  box-shadow: 0 0 40px rgba(0,170,255,0.2);
+  backdrop-filter: blur(20px);
+}
+
+/* Inputs */
+input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid var(--blue);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+/* File Upload */
+.file-label {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 2px dashed var(--blue);
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.file-label input {
+  display: none;
+}
+
+/* Buttons */
+.btn,
+.btn-secondary,
+.switch-page {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 12px 0;
+  background: var(--blue);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 0 18px rgba(0,170,255,0.6);
+  transition: 0.2s;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--blue);
+}
+
+/* QR Canvas */
+canvas, #qrOutput img {
+  width: 260px;
+  border-radius: 14px;
+  margin-top: 20px;
+}
+
+/* Decoded Box */
+.decoded-box {
+  padding: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--blue);
+  border-radius: 12px;
+  margin-top: 15px;
+
+  /* Fix overflow */
+  max-height: 180px;
+  overflow-y: auto;
+
+  /* text */
+  text-align: left;
+}
+
+/* Title inside the decoded box */
+.decoded-title {
+  display: block;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 6px;
+  font-size: 15px;
+  text-shadow: 0 0 8px rgba(0,170,255,0.4);
+}
+
+#decodedText {
+  white-space: normal;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Spinner */
+.spinner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  margin: 15px auto;
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top: 4px solid var(--blue);
+  animation: spin 0.8s linear infinite;
+  display: none;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
