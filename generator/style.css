@@ -1,6 +1,7 @@
-/* Import Font */
+/* Import Modern Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+/* --- Variable Definitions --- */
 :root {
   --blue: #00aaff;
   --blue-hover: #0088cc;
@@ -14,7 +15,7 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Themes */
+/* --- Theme Handling --- */
 [data-theme="dark"] {
   --bg: var(--dark-bg);
   --text: var(--text-light);
@@ -24,12 +25,13 @@
 [data-theme="light"] {
   --bg: var(--light-bg);
   --text: var(--text-dark);
-  --glass: rgba(0, 0, 0, 0.04);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-heavy: rgba(255, 255, 255, 0.9);
   --border: rgba(0, 0, 0, 0.1);
   --input-bg: #ffffff;
 }
 
-/* Base Styles */
+/* --- Base Styles --- */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -41,15 +43,14 @@ body {
   font-family: 'Poppins', sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: var(--transition);
+  transition: background 0.4s ease, color 0.4s ease;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
 }
 
-/* Toggle Button (Modernized) */
+/* --- Navigation & Controls --- */
 .toggle-btn {
   position: fixed;
   top: 20px;
@@ -57,84 +58,89 @@ body {
   background: var(--glass);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 12px;
-  width: 45px;
-  height: 45px;
+  padding: 0;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   cursor: pointer;
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .toggle-btn:hover {
-  transform: rotate(15deg) scale(1.1);
+  transform: scale(1.1) rotate(15deg);
   background: var(--glass-heavy);
 }
 
-/* Title Styling */
+/* --- Typography --- */
 .main-title {
-  font-size: clamp(1.5rem, 5vw, 2rem); /* Fluid Typography */
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
   margin-top: 80px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-weight: 600;
   color: var(--blue);
-  text-shadow: 0 0 25px rgba(0, 170, 255, 0.4);
-  letter-spacing: -0.5px;
+  text-align: center;
+  text-shadow: 0 0 30px rgba(0, 170, 255, 0.4);
+  letter-spacing: -1px;
 }
 
-/* Card - Enhanced Glassmorphism */
+/* --- Main Card --- */
 .card {
   width: 100%;
-  max-width: 450px;
-  margin: 20px auto 40px;
-  padding: 32px;
-  border-radius: 24px;
+  max-width: 440px;
+  margin: 25px auto 50px;
+  padding: 35px;
+  border-radius: 28px;
   background: var(--glass);
   border: 1px solid var(--border);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 
-              inset 0 0 0 1px var(--border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  animation: fadeIn 0.6s ease-out;
+  animation: slideUp 0.6s ease-out;
 }
 
-/* Form Elements */
+/* --- Form Inputs --- */
 input[type="text"] {
   width: 100%;
-  padding: 16px;
-  border-radius: 14px;
+  padding: 16px 20px;
+  border-radius: 15px;
   border: 2px solid transparent;
   background: var(--input-bg);
   color: var(--text);
   margin-bottom: 20px;
   font-size: 16px;
+  font-family: inherit;
   transition: var(--transition);
   outline: none;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
 input[type="text"]:focus {
   border-color: var(--blue);
-  box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+  box-shadow: 0 0 0 4px rgba(0, 170, 255, 0.15);
 }
 
-/* File Upload Area */
+/* --- Custom File Upload --- */
 .file-label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
-  padding: 24px;
-  background: rgba(0, 170, 255, 0.03);
+  padding: 30px 20px;
+  background: rgba(0, 170, 255, 0.04);
   border: 2px dashed var(--blue);
-  border-radius: 16px;
+  border-radius: 18px;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   color: var(--text);
   transition: var(--transition);
 }
@@ -144,106 +150,160 @@ input[type="text"]:focus {
   transform: translateY(-2px);
 }
 
-/* Buttons Styling */
-.btn, .switch-page {
-  display: inline-flex;
+.file-label input {
+  display: none;
+}
+
+.file-label span {
+  font-weight: 500;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* --- Buttons --- */
+.btn, .btn-secondary, .switch-page {
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 15px;
-  border-radius: 14px;
-  border: none;
-  background: var(--blue);
-  color: #fff;
+  padding: 16px;
+  border-radius: 15px;
   font-weight: 600;
   font-size: 16px;
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 10px 20px rgba(0, 170, 255, 0.3);
   text-decoration: none;
-  margin-bottom: 12px;
+  border: none;
+  margin-bottom: 15px;
+}
+
+.btn {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 170, 255, 0.35);
 }
 
 .btn:hover {
   background: var(--blue-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 25px rgba(0, 170, 255, 0.4);
-}
-
-.btn:active {
-  transform: translateY(0);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 170, 255, 0.45);
 }
 
 .btn-secondary {
   background: transparent;
   border: 2px solid var(--blue);
   color: var(--text);
-  box-shadow: none;
+  margin-top: 10px;
 }
 
 .btn-secondary:hover {
-  background: var(--blue);
-  color: #fff;
+  background: rgba(0, 170, 255, 0.1);
+  transform: translateY(-2px);
 }
 
-/* Output Area */
-#qrOutput, canvas {
-  max-width: 100%;
-  height: auto !important;
-  border-radius: 16px;
-  margin-top: 25px;
-  background: white; /* Ensures QR code contrast */
-  padding: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-/* Decoded Content Box */
-.decoded-box {
-  padding: 18px;
-  background: var(--glass-heavy);
-  border-left: 4px solid var(--blue);
-  border-radius: 12px;
+.switch-page {
+  background: transparent;
+  color: var(--blue);
+  font-size: 14px;
   margin-top: 20px;
-  max-height: 200px;
-  overflow-y: auto;
+  opacity: 0.8;
+}
+
+.switch-page:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* --- QR Code Display --- */
+#qrOutput {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#qrOutput canvas, #qrOutput img {
+  width: 100% !important;
+  max-width: 280px !important;
+  height: auto !important;
+  border-radius: 20px;
+  padding: 15px;
+  background: #fff; /* QR codes need light backgrounds to be scannable */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+}
+
+/* --- Decoder Box --- */
+.decoded-box {
+  padding: 20px;
+  background: var(--glass-heavy);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--blue);
+  border-radius: 16px;
+  margin: 20px 0;
   text-align: left;
-  scrollbar-width: thin;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .decoded-title {
   display: block;
-  text-transform: uppercase;
   font-size: 12px;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   color: var(--blue);
-  margin-bottom: 8px;
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+#decodedText {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  color: var(--text);
+}
+
+/* --- Spinner --- */
+.spinner {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin: 20px auto;
+  border: 4px solid rgba(0, 170, 255, 0.1);
+  border-top: 4px solid var(--blue);
+  animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+/* --- Animations --- */
+@keyframes spin { 
+  to { transform: rotate(360deg); } 
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Breakpoints */
+/* --- Responsive Design --- */
 @media (max-width: 480px) {
   .card {
-    padding: 24px 18px;
-    border-radius: 20px;
+    padding: 25px 20px;
+    margin-top: 15px;
+    border-radius: 22px;
   }
   
   .main-title {
-    margin-top: 60px;
+    margin-top: 70px;
   }
 
   .toggle-btn {
     top: 15px;
     right: 15px;
+    width: 42px;
+    height: 42px;
   }
 }
 
-/* Utility for high contrast */
+/* High Contrast/Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
