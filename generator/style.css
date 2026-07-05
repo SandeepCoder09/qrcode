@@ -1,312 +1,708 @@
 /* Import Modern Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* --- Variable Definitions --- */
+/* ================================================================
+   VARIABLES & THEMES  (Black & White)
+================================================================ */
 :root {
-  --blue: #00aaff;
-  --blue-hover: #0088cc;
-  --glass: rgba(255, 255, 255, 0.08);
-  --glass-heavy: rgba(255, 255, 255, 0.12);
-  --border: rgba(255, 255, 255, 0.15);
-  --text-light: #ffffff;
-  --text-dark: #1a1a1a;
-  --dark-bg: #030711;
-  --light-bg: #f0f4f8;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --accent:        #000000;
+  --accent-inv:    #ffffff;
+  --transition:    all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-card:   26px;
+  --radius-btn:    14px;
+  --radius-input:  13px;
 }
 
-/* --- Theme Handling --- */
+/* ── Dark theme: black background, white content ── */
 [data-theme="dark"] {
-  --bg: var(--dark-bg);
-  --text: var(--text-light);
-  --input-bg: rgba(255, 255, 255, 0.05);
+  --bg:            #0a0a0a;
+  --bg-grad:       radial-gradient(ellipse at 50% 0%, #161616 0%, #0a0a0a 65%);
+  --surface:       #131313;
+  --surface-hi:    #1c1c1c;
+  --text:          #f5f5f5;
+  --text-muted:    rgba(245,245,245,0.45);
+  --border:        rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.22);
+  --input-bg:      rgba(255,255,255,0.05);
+  --input-text:    #f5f5f5;
+  --card-shadow:   0 24px 56px rgba(0,0,0,0.70), 0 0 0 1px rgba(255,255,255,0.06);
+  --spinner-track: rgba(255,255,255,0.10);
+  --spinner-head:  #ffffff;
+  --decoded-bg:    rgba(255,255,255,0.04);
+  --video-border:  rgba(255,255,255,0.25);
+  --scan-color:    rgba(255,255,255,0.85);
+  --file-border:   rgba(255,255,255,0.25);
+  --file-bg:       rgba(255,255,255,0.03);
+  --success-border:#5aff9a;
+  --success-bg:    rgba(90,255,154,0.06);
+  --icon-stroke:   #f5f5f5;
+  --btn-primary-bg:#ffffff;
+  --btn-primary-fg:#0a0a0a;
+  --btn-primary-sh: 0 8px 24px rgba(255,255,255,0.12);
+  --btn-sec-border: rgba(255,255,255,0.30);
+  --btn-sec-hover:  rgba(255,255,255,0.07);
+  --link-color:    rgba(245,245,245,0.65);
+  --link-hover-bg: rgba(255,255,255,0.06);
 }
 
+/* ── Light theme: white background, black content ── */
 [data-theme="light"] {
-  --bg: var(--light-bg);
-  --text: var(--text-dark);
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-heavy: rgba(255, 255, 255, 0.9);
-  --border: rgba(0, 0, 0, 0.1);
-  --input-bg: #ffffff;
+  --bg:            #f9f9f9;
+  --bg-grad:       radial-gradient(ellipse at 50% 0%, #efefef 0%, #f9f9f9 65%);
+  --surface:       #ffffff;
+  --surface-hi:    #f2f2f2;
+  --text:          #111111;
+  --text-muted:    rgba(17,17,17,0.45);
+  --border:        rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.18);
+  --input-bg:      #ffffff;
+  --input-text:    #111111;
+  --card-shadow:   0 16px 48px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06);
+  --spinner-track: rgba(0,0,0,0.10);
+  --spinner-head:  #111111;
+  --decoded-bg:    rgba(0,0,0,0.03);
+  --video-border:  rgba(0,0,0,0.20);
+  --scan-color:    rgba(0,0,0,0.80);
+  --file-border:   rgba(0,0,0,0.20);
+  --file-bg:       rgba(0,0,0,0.02);
+  --success-border:#18a558;
+  --success-bg:    rgba(24,165,88,0.06);
+  --icon-stroke:   #111111;
+  --btn-primary-bg:#111111;
+  --btn-primary-fg:#ffffff;
+  --btn-primary-sh: 0 8px 24px rgba(0,0,0,0.18);
+  --btn-sec-border: rgba(0,0,0,0.22);
+  --btn-sec-hover:  rgba(0,0,0,0.05);
+  --link-color:    rgba(17,17,17,0.55);
+  --link-hover-bg: rgba(0,0,0,0.04);
 }
 
-/* --- Base Styles --- */
-* {
+/* ================================================================
+   BASE RESET
+================================================================ */
+*, *::before, *::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  padding: 0 15px;
+  padding: 0 16px 48px;
   font-family: 'Poppins', sans-serif;
-  background: var(--bg);
+  background: var(--bg) var(--bg-grad) fixed;
   color: var(--text);
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: background 0.35s ease, color 0.35s ease;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* --- Navigation & Controls --- */
+/* ================================================================
+   THEME TOGGLE  (SVG icon via mask-image)
+================================================================ */
 .toggle-btn {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: var(--glass);
-  border: 1px solid var(--border);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
   color: var(--text);
   padding: 0;
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   cursor: pointer;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  font-size: 20px;
+  font-size: 0; /* hide any fallback text */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   transition: var(--transition);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+
+/* The SVG icon is rendered by a pseudo-element using mask */
+.toggle-btn::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 22px;
+  background: var(--icon-stroke);
+  transition: var(--transition);
+  /* dark mode → show sun icon */
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='12' y1='2' x2='12' y2='4'/%3E%3Cline x1='12' y1='20' x2='12' y2='22'/%3E%3Cline x1='4.22' y1='4.22' x2='5.64' y2='5.64'/%3E%3Cline x1='18.36' y1='18.36' x2='19.78' y2='19.78'/%3E%3Cline x1='2' y1='12' x2='4' y2='12'/%3E%3Cline x1='20' y1='12' x2='22' y2='12'/%3E%3Cline x1='4.22' y1='19.78' x2='5.64' y2='18.36'/%3E%3Cline x1='18.36' y1='5.64' x2='19.78' y2='4.22'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cline x1='12' y1='2' x2='12' y2='4'/%3E%3Cline x1='12' y1='20' x2='12' y2='22'/%3E%3Cline x1='4.22' y1='4.22' x2='5.64' y2='5.64'/%3E%3Cline x1='18.36' y1='18.36' x2='19.78' y2='19.78'/%3E%3Cline x1='2' y1='12' x2='4' y2='12'/%3E%3Cline x1='20' y1='12' x2='22' y2='12'/%3E%3Cline x1='4.22' y1='19.78' x2='5.64' y2='18.36'/%3E%3Cline x1='18.36' y1='5.64' x2='19.78' y2='4.22'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+}
+
+/* light mode → show moon icon */
+[data-theme="light"] .toggle-btn::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
 }
 
 .toggle-btn:hover {
-  transform: scale(1.1) rotate(15deg);
-  background: var(--glass-heavy);
+  transform: scale(1.10) rotate(12deg);
+  background: var(--surface-hi);
+  border-color: var(--border-strong);
 }
 
-/* --- Typography --- */
+/* ================================================================
+   TYPOGRAPHY
+================================================================ */
 .main-title {
-  font-size: clamp(1.8rem, 8vw, 2.5rem);
-  margin-top: 80px;
-  margin-bottom: 5px;
-  font-weight: 600;
-  color: var(--blue);
+  font-size: clamp(1.75rem, 7.5vw, 2.5rem);
+  margin-top: 88px;
+  margin-bottom: 2px;
+  font-weight: 700;
+  color: var(--text);
   text-align: center;
-  text-shadow: 0 0 30px rgba(0, 170, 255, 0.4);
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
 }
 
-/* --- Main Card --- */
+.main-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0 0 4px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+/* ================================================================
+   MAIN CARD
+================================================================ */
 .card {
   width: 100%;
-  max-width: 440px;
-  margin: 25px auto 50px;
-  padding: 35px;
-  border-radius: 28px;
-  background: var(--glass);
+  max-width: 448px;
+  margin: 22px auto 56px;
+  padding: 32px 30px 28px;
+  border-radius: var(--radius-card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  animation: slideUp 0.6s ease-out;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0;                   /* managed per-element via margin */
+  animation: slideUp 0.45s ease-out both;
 }
 
-/* --- Form Inputs --- */
+/* ================================================================
+   FORM INPUTS
+================================================================ */
 input[type="text"] {
   width: 100%;
-  padding: 16px 20px;
-  border-radius: 15px;
-  border: 2px solid transparent;
+  padding: 14px 18px;
+  border-radius: var(--radius-input);
+  border: 1.5px solid var(--border-strong);
   background: var(--input-bg);
-  color: var(--text);
-  margin-bottom: 20px;
-  font-size: 16px;
-  font-family: inherit;
+  color: var(--input-text);
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   transition: var(--transition);
   outline: none;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
+
+input[type="text"]::placeholder { color: var(--text-muted); }
 
 input[type="text"]:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 4px rgba(0, 170, 255, 0.15);
+  border-color: var(--text);
+  box-shadow: 0 0 0 3px rgba(128,128,128,0.12);
 }
 
-/* --- Custom File Upload --- */
+/* ================================================================
+   SECTION DIVIDER (visual separator between areas)
+================================================================ */
+.section-sep {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 18px 0;
+  border: none;
+}
+
+/* ================================================================
+   FILE UPLOAD
+================================================================ */
 .file-label {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  padding: 30px 20px;
-  background: rgba(0, 170, 255, 0.04);
-  border: 2px dashed var(--blue);
-  border-radius: 18px;
+  padding: 24px 20px;
+  background: var(--file-bg);
+  border: 1.5px dashed var(--file-border);
+  border-radius: 16px;
   cursor: pointer;
-  margin-bottom: 25px;
+  margin-bottom: 16px;
   color: var(--text);
+  transition: var(--transition);
+}
+
+/* Upload SVG icon via mask */
+.file-label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 28px;
+  background: var(--text-muted);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
   transition: var(--transition);
 }
 
 .file-label:hover {
-  background: rgba(0, 170, 255, 0.08);
+  background: var(--surface-hi);
+  border-color: var(--border-strong);
   transform: translateY(-2px);
 }
 
-.file-label input {
-  display: none;
-}
+.file-label:hover::before { background: var(--text); }
+
+.file-label input { display: none; }
 
 .file-label span {
   font-weight: 500;
-  font-size: 14px;
-  opacity: 0.9;
+  font-size: 13px;
+  color: var(--text-muted);
 }
 
-/* --- Buttons --- */
+.file-label.has-file span {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ================================================================
+   BUTTONS  — SVG icons injected by JS via .btn-icon child
+================================================================ */
 .btn, .btn-secondary, .switch-page {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 9px;
   width: 100%;
-  padding: 16px;
-  border-radius: 15px;
+  padding: 14px 20px;
+  border-radius: var(--radius-btn);
   font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
   cursor: pointer;
   transition: var(--transition);
   text-decoration: none;
   border: none;
-  margin-bottom: 15px;
+  letter-spacing: 0.1px;
+  position: relative;
+  overflow: hidden;
 }
 
-.btn {
-  background: var(--blue);
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(0, 170, 255, 0.35);
-}
-
-.btn:hover {
-  background: var(--blue-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(0, 170, 255, 0.45);
-}
-
-.btn-secondary {
-  background: transparent;
-  border: 2px solid var(--blue);
-  color: var(--text);
+/* spacing between consecutive buttons */
+.btn + .btn,
+.btn + .btn-secondary,
+.btn-secondary + .btn,
+.btn-secondary + .btn-secondary {
   margin-top: 10px;
 }
 
-.btn-secondary:hover {
-  background: rgba(0, 170, 255, 0.1);
+/* Ripple layer */
+.btn::after, .btn-secondary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.08);
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: inherit;
+}
+.btn:active::after, .btn-secondary:active::after { opacity: 1; }
+
+/* Primary */
+.btn {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  box-shadow: var(--btn-primary-sh);
+  margin-bottom: 0;
+}
+.btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.22);
+  filter: brightness(1.06);
+}
+.btn:active { transform: translateY(0); }
+
+/* Secondary / outline */
+.btn-secondary {
+  background: transparent;
+  border: 1.5px solid var(--btn-sec-border);
+  color: var(--text);
+  margin-bottom: 0;
+}
+.btn-secondary:hover {
+  background: var(--btn-sec-hover);
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
 }
 
+/* Navigation link */
 .switch-page {
   background: transparent;
-  color: var(--blue);
-  font-size: 14px;
-  margin-top: 20px;
-  opacity: 0.8;
+  color: var(--link-color);
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 16px;
+  margin-bottom: 0;
+  border: 1px solid transparent;
+  padding: 10px 16px;
 }
-
 .switch-page:hover {
-  opacity: 1;
-  text-decoration: underline;
+  color: var(--text);
+  background: var(--link-hover-bg);
+  border-color: var(--border);
+  transform: none;
 }
 
-/* --- QR Code Display --- */
+/* Inline SVG icon inside buttons */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.btn-icon svg {
+  display: block;
+}
+
+/* ================================================================
+   QR OUTPUT  — tight, clean spacing
+================================================================ */
 #qrOutput {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
+  /* Only takes space when it has content */
+  min-height: 0;
 }
 
-#qrOutput canvas, #qrOutput img {
+#qrOutput:empty {
+  display: none;
+}
+
+#qrOutput canvas,
+#qrOutput img {
   width: 100% !important;
-  max-width: 280px !important;
+  max-width: 240px !important;
   height: auto !important;
-  border-radius: 20px;
-  padding: 15px;
-  background: #fff; /* QR codes need light backgrounds to be scannable */
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border-radius: 16px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.06);
+  display: block;
+  animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* --- Decoder Box --- */
+/* Download button appears right below the QR */
+#downloadBtn {
+  margin-top: 14px;
+}
+
+/* ================================================================
+   SPINNER  — hidden by default, no margin when hidden
+================================================================ */
+.spinner {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 16px auto;
+  border: 3px solid var(--spinner-track);
+  border-top-color: var(--spinner-head);
+  animation: spin 0.85s linear infinite;
+  flex-shrink: 0;
+}
+.spinner.active { display: block; }
+
+/* ================================================================
+   DECODED RESULT BOX
+================================================================ */
 .decoded-box {
-  padding: 20px;
-  background: var(--glass-heavy);
+  padding: 16px 18px;
+  background: var(--decoded-bg);
   border: 1px solid var(--border);
-  border-left: 5px solid var(--blue);
-  border-radius: 16px;
-  margin: 20px 0;
+  border-left: 3px solid var(--border-strong);
+  border-radius: 14px;
+  margin-top: 16px;
+  margin-bottom: 14px;
   text-align: left;
-  max-height: 250px;
+  max-height: 210px;
   overflow-y: auto;
 }
 
 .decoded-title {
   display: block;
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--blue);
+  letter-spacing: 2.5px;
+  color: var(--text-muted);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
 }
 
 #decodedText {
   margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  word-wrap: break-word;
+  font-size: 13.5px;
+  line-height: 1.75;
+  word-break: break-all;
   color: var(--text);
 }
 
-/* --- Spinner --- */
-.spinner {
-  width: 45px;
-  height: 45px;
+/* Success state */
+.decoded-box.success {
+  border-left-color: var(--success-border);
+  background: var(--success-bg);
+}
+
+/* Copy button spacing */
+#copyBtn {
+  margin-bottom: 10px;
+}
+
+/* ================================================================
+   CAMERA / VIDEO
+================================================================ */
+.camera-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: none;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  border: 1px solid var(--video-border);
+}
+.camera-wrapper.active { display: block; }
+
+.camera-wrapper video {
+  width: 100%;
+  display: block;
+  border-radius: 0;
+  background: #000;
+  max-height: 280px;
+  object-fit: cover;
+}
+
+/* Animated scan line */
+.scan-line {
+  position: absolute;
+  left: 6%;
+  width: 88%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--scan-color), transparent);
+  border-radius: 2px;
+  animation: scanMove 2.2s ease-in-out infinite;
+  pointer-events: none;
+  top: 0;
+}
+
+/* Corner brackets */
+.scan-corners {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.scan-corners::before,
+.scan-corners::after {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-color: var(--scan-color);
+  border-style: solid;
+}
+.scan-corners::before {
+  top: 10px; left: 10px;
+  border-width: 2.5px 0 0 2.5px;
+  border-radius: 5px 0 0 0;
+}
+.scan-corners::after {
+  bottom: 10px; right: 10px;
+  border-width: 0 2.5px 2.5px 0;
+  border-radius: 0 0 5px 0;
+}
+
+/* Scan status badge */
+.scan-badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 7px 15px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+.scan-badge.active { display: flex; }
+
+.scan-badge .dot {
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  margin: 20px auto;
-  border: 4px solid rgba(0, 170, 255, 0.1);
-  border-top: 4px solid var(--blue);
-  animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  background: var(--spinner-head);
+  animation: pulse 1.3s ease-in-out infinite;
 }
 
-/* --- Animations --- */
-@keyframes spin { 
-  to { transform: rotate(360deg); } 
+/* ================================================================
+   ANIMATIONS
+================================================================ */
+@keyframes spin     { to { transform: rotate(360deg); } }
+@keyframes slideUp  {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes scanMove {
+  0%   { top: 4%; }
+  50%  { top: 88%; }
+  100% { top: 4%; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.65); }
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ================================================================
+   FOOTER
+================================================================ */
+.site-footer {
+  width: 100%;
+  max-width: 448px;
+  margin: 0 auto 32px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+  animation: slideUp 0.55s ease-out both;
+  animation-delay: 0.1s;
 }
 
-/* --- Responsive Design --- */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* The "09" wordmark badge */
+.footer-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+.footer-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.footer-tagline {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.2px;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: var(--text);
+}
+
+.footer-links .sep {
+  opacity: 0.35;
+  user-select: none;
+}
+
+.footer-copy {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  opacity: 0.55;
+  text-align: center;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
 @media (max-width: 480px) {
   .card {
-    padding: 25px 20px;
-    margin-top: 15px;
-    border-radius: 22px;
+    padding: 24px 18px 20px;
+    margin-top: 12px;
+    border-radius: 20px;
   }
-  
-  .main-title {
-    margin-top: 70px;
-  }
-
-  .toggle-btn {
-    top: 15px;
-    right: 15px;
-    width: 42px;
-    height: 42px;
-  }
+  .main-title { margin-top: 74px; }
+  .toggle-btn { top: 14px; right: 14px; width: 42px; height: 42px; }
+  .btn, .btn-secondary { font-size: 13.5px; padding: 13px 18px; }
+  .file-label { padding: 20px 16px; }
+  #qrOutput canvas, #qrOutput img { max-width: 200px !important; }
 }
 
-/* High Contrast/Reduced Motion */
+/* ================================================================
+   REDUCED MOTION
+================================================================ */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

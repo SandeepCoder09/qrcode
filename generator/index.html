@@ -5,61 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>09 QR Generator</title>
 
-  <!-- ✅ SEO -->
-  <meta name="description" content="QR Generator – Create QR codes instantly with logo watermark and download support.">
+  <!-- SEO -->
+  <meta name="description" content="09 QR Generator – Create QR codes instantly with logo watermark and one-click download.">
   <meta name="keywords" content="QR Generator, QR Code Generator, Create QR, Logo QR">
   <meta name="author" content="SandeepCoder09">
 
-  <!-- ✅ Open Graph -->
-  <meta property="og:title" content="QR Generator">
+  <!-- Open Graph -->
+  <meta property="og:title" content="09 QR Generator">
   <meta property="og:description" content="Generate QR codes instantly with logo watermark and download option.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/favicon-192.png">
 
-  <!-- ✅ Theme Color -->
-  <meta name="theme-color" content="#00aaff">
+  <!-- Theme Color (matches dark bg) -->
+  <meta name="theme-color" content="#0a0a0a">
 
-  <!-- ✅ Favicon -->
-  <link rel="icon" href="qr-logo-brand-09.png" type="image/x-icon">
-  <link rel="icon" sizes="32x32" href="/qr-logo-brand-09.png">
-  <link rel="apple-touch-icon" href="/qr-logo-brand-09.png">
+  <!-- Favicon -->
+  <link rel="icon" href="qr-logo-brand-09.png" type="image/png">
+  <link rel="apple-touch-icon" href="qr-logo-brand-09.png">
 
-  <!-- ❗ ORIGINAL CSS (UNCHANGED) -->
-  <link rel="stylesheet" href="../generator/style.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 
-  <!-- QR Lib -->
+  <!-- QR Library -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 
 <body>
 
-  <button id="themeToggle" class="toggle-btn">🌙</button>
+  <!-- Theme toggle (icon rendered via CSS mask-image) -->
+  <button id="themeToggle" class="toggle-btn" aria-label="Switch to light theme"></button>
 
-  <h1 class="main-title">09 QR Generator</h1>
+  <h1 class="main-title">QR GenDecoder</h1>
 
   <main class="card">
 
-    <input type="text" id="qrText" placeholder="Enter text or URL">
+    <!-- Text input -->
+    <input type="text" id="qrText" placeholder="Enter text or URL…" autocomplete="off" spellcheck="false">
 
+    <!-- Logo upload -->
     <label class="file-label">
       <span>Upload Logo (Optional)</span>
       <input type="file" id="logoInput" accept="image/*">
     </label>
 
+    <!-- Generate button (SVG icon injected by JS) -->
     <button id="generateBtn" class="btn">Generate QR</button>
 
+    <!-- Spinner (hidden by default) -->
     <div class="spinner" id="loadingSpinner"></div>
 
+    <!-- QR canvas output (hidden when empty via CSS) -->
     <div id="qrOutput"></div>
 
-    <a id="downloadBtn" download="qr.png" class="btn-secondary">Download QR</a>
+    <!-- Download button (hidden until QR generated) -->
+    <a id="downloadBtn" download="qr-09.png" class="btn-secondary" style="display:none;">Download QR</a>
 
-    <a href="../decoder/index.html" class="switch-page">Go to Decoder →</a>
+    <!-- Page navigation (SVG icon injected by JS) -->
+    <a href="../decoder/index.html" class="switch-page">Go to Decoder</a>
 
   </main>
 
-  <!-- ❗ ORIGINAL JS (UNCHANGED) -->
-  <script src="../generator/script.js"></script>
+  <!-- Branding Footer -->
+  <footer class="site-footer">
+    <div class="footer-brand">
+    </div>
+    <p class="footer-tagline">QR GenDecoder &mdash; Generate &amp; Decode QR codes instantly</p>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="../generator/index.html">Generator</a>
+      <span class="sep">&bull;</span>
+      <a href="../decoder/index.html">Decoder</a>
+      <span class="sep">&bull;</span>
+    </nav>
+    <p class="footer-copy">&copy; <span id="footerYear"></span> Sandy Coder . All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>
